@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: books-shop
+  #mysql连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.213.140:3306/shopping
+    username: root
+    password: Aa050214
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true

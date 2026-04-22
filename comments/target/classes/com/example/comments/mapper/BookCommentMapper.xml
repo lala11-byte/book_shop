@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.comments.mapper.BookCommentMapper">
+    <select id="selectComment" resultType="com.example.comments.pojo.BookComment" >
+        select id,user_id userId,content,rating,create_time createTime
+        from book_comment where isbn=#{isbn}
+    </select>
+</mapper>

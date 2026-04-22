@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.books.mapper.UsedBookMapper">
+
+    <select id="selectUsedBooks" resultType="com.example.books.pojo.UsedBook">
+    SELECT
+    used_id,
+    isbn,
+    `condition`,
+    price,
+    stock,
+    seller_id,
+    created_at
+    FROM used_books
+    WHERE isbn=#{isbn}
+
+    <if test="minPrice != null">
+        and price &gt;= #{minPrice}
+    </if>
+    <if test="maxPrice != null">
+        and price &lt; #{maxPrice}
+    </if>
+    ORDER BY created_at DESC
+    LIMIT #{offset}, #{pageSize}
+    </select>
+    <select id="countUsedBooks" resultType="int">
+        select count(*) FROM used_books
+        WHERE isbn=#{isbn}
+
+        <if test="minPrice != null">
+            and price >= #{minPrice}
+        </if>
+        <if test="maxPrice != null">
+            and price &lt; #{maxPrice}
+        </if>
+    </select>
+</mapper>

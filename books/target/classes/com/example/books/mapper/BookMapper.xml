@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.books.mapper.BookMapper">
+
+    <!-- ================= 查询列表 ================= -->
+    <select id="selectBooks" resultType="com.example.books.pojo.Book">
+        SELECT  isbn, title, subtitle, author, publisher, image, stock
+        FROM books
+
+        <where>
+
+            <!-- 🔍 keyword + type 搜索 -->
+            <if test="keyword != null and keyword != ''">
+
+                <choose>
+
+                    <!-- ✅ 全部字段 -->
+                    <when test="type == null or type == ''">
+                        (
+                        title LIKE CONCAT('%', #{keyword}, '%')
+                        OR subtitle LIKE CONCAT('%', #{keyword}, '%')
+                        OR author LIKE CONCAT('%', #{keyword}, '%')
+                        OR publisher LIKE CONCAT('%', #{keyword}, '%')
+                        OR isbn LIKE CONCAT('%', #{keyword}, '%')
+                        )
+                    </when>
+
+                    <!-- ✅ 指定字段 -->
+                    <when test="type == 'title'">
+                        title LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+
+                    <when test="type == 'author'">
+                        author LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+
+                    <when test="type == 'publisher'">
+                        publisher LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+
+                    <when test="type == 'isbn'">
+                        isbn = #{keyword}
+                    </when>
+
+                </choose>
+
+            </if>
+
+            <!-- 🔎 高级搜索（AND过滤） -->
+            <if test="author != null and author != ''">
+                AND author LIKE CONCAT('%', #{author}, '%')
+            </if>
+
+            <if test="publisher != null and publisher != ''">
+                AND publisher LIKE CONCAT('%', #{publisher}, '%')
+            </if>
+
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+
+            <if test="isbn != null and isbn != ''">
+                AND isbn = #{isbn}
+            </if>
+
+        </where>
+
+
+
+        LIMIT #{offset}, #{size}
+    </select>
+
+
+    <select id="selectByIsbn" resultType="com.example.books.pojo.Book">
+        SELECT
+            title,
+            subtitle,
+            author,
+            publisher,
+            isbn,
+            image,
+            description,
+            publish_date,
+            stock
+        FROM books
+        WHERE isbn = #{isbn}
+    </select>
+
+    <!-- ================= 统计总数 ================= -->
+    <select id="countBooks" resultType="int">
+        SELECT COUNT(*)
+        FROM books
+
+        <where>
+
+            <if test="keyword != null and keyword != ''">
+
+                <choose>
+
+                    <when test="type == null or type == ''">
+                        (
+                        title LIKE CONCAT('%', #{keyword}, '%')
+                        OR subtitle LIKE CONCAT('%', #{keyword}, '%')
+                        OR author LIKE CONCAT('%', #{keyword}, '%')
+                        OR publisher LIKE CONCAT('%', #{keyword}, '%')
+                        OR isbn LIKE CONCAT('%', #{keyword}, '%')
+                        )
+                    </when>
+
+                    <when test="type == 'title'">
+                        title LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+
+                    <when test="type == 'author'">
+                        author LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+
+                    <when test="type == 'publisher'">
+                        publisher LIKE CONCAT('%', #{keyword}, '%')
+                    </when>
+
+                    <when test="type == 'isbn'">
+                        isbn = #{keyword}
+                    </when>
+
+                </choose>
+
+            </if>
+
+            <if test="author != null and author != ''">
+                AND author LIKE CONCAT('%', #{author}, '%')
+            </if>
+
+            <if test="publisher != null and publisher != ''">
+                AND publisher LIKE CONCAT('%', #{publisher}, '%')
+            </if>
+
+            <if test="title != null and title != ''">
+                AND title LIKE CONCAT('%', #{title}, '%')
+            </if>
+
+            <if test="isbn != null and isbn != ''">
+                AND isbn = #{isbn}
+            </if>
+
+        </where>
+    </select>
+
+</mapper>
