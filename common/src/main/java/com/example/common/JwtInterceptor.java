@@ -1,5 +1,6 @@
 package com.example.common;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,7 +21,9 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         try {
             // 校验 token（你自己的工具类）
-            JwtUtil.parseToken(token);
+            Claims claims = JwtUtil.parseToken(token);
+            Integer userId = claims.get("userId", Integer.class);
+            request.setAttribute("currentUserId", userId);
         } catch (Exception e) {
             response.setStatus(401);
             return false;
