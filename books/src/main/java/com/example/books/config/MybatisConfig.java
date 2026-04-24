@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @MapperScan({
-        "com.example.comments"
+        "com.example.comments",
+        "com.example.books.mapper"
 })
 public class MybatisConfig {
 }

@@ -11,17 +11,20 @@
     </parent>
 
 
-    <artifactId>comments</artifactId>
+    <artifactId>users</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>comments</name>
-    <description>books</description>
+    <name>users</name>
+    <description>users</description>
     <dependencies>
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>common</artifactId>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.7.1</version> <!-- 使用与您Spring Boot版本兼容的版本 -->
+        </dependency>
     </dependencies>
 
 

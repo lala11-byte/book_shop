@@ -19,7 +19,7 @@ public class JwtUtil {
     private static final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
 
     // ✅ 生成token（存多个字段）
-    public String generateToken(Integer userId, String username) {
+    static public String generateToken(Integer userId, String username) {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", userId);
@@ -33,7 +33,7 @@ public class JwtUtil {
     }
 
     // ✅ 解析token（返回Claims）
-    public Claims parseToken(String token) {
+    static public Claims parseToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(KEY)
                 .build()

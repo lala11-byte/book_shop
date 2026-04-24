@@ -118,6 +118,7 @@
 		<module>books</module>
 		<module>common</module>
 		<module>comments</module>
+		<module>users</module>
 	</modules>
 
 	<build>
