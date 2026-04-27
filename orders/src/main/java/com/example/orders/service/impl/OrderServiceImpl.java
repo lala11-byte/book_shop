@@ -1,6 +1,8 @@
 package com.example.orders.service.impl;
 
 import com.example.common.JwtUtil;
+import com.example.orders.mapper.AddressMapper;
+import com.example.orders.pojo.Address;
 import com.example.orders.pojo.OrderItem;
 import com.example.orders.pojo.Orders;
 import com.example.orders.pojo.dto.OrderPushRequest;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import com.example.orders.mapper.OrdersMapper;
 import com.example.orders.mapper.OrderItemMapper;
@@ -81,4 +84,5 @@ public class OrderServiceImpl implements OrderService {
         // 返回订单号给前端
         return orderNo;
     }
+
 }
