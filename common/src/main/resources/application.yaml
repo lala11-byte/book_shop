@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: books-shop
+  #mysql连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.213.140:3306/shopping
+    username: root
+    password: Aa050214
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+alibaba:
+  cloud:
+    access-key:  ${OSS_ACCESS_KEY}
+    secret-key: ${OSS_SECRET_KEY}
+    oss:
+      endpoint: oss-cn-beijing.aliyuncs.com
+      bucket-name: bookshopbuck
+    ram:
+      role-arn: acs:ram::1596440142952958:role/oss-upload-role
+      role-session-name: aliyun-oss-sts-session
+      # 临时凭证有效期（秒）
+      sts-duration-seconds: 3600

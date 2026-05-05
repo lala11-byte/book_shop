@@ -22,6 +22,7 @@ public class OrderControllerImpl implements OrderController {
 
     @PostMapping("/pushorder")
     public Result pushOrder(@RequestBody OrderPushRequest request) {
+
         try {
            String orderNo = orderService.createOrder(request);
             System.out.println("生成的订单号: " + orderNo);

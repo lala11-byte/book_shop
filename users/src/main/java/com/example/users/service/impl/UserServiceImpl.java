@@ -9,6 +9,7 @@ import com.example.users.utils.PasswordUtil;
 import jakarta.annotation.Resource;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 @Slf4j
 @Service
@@ -71,5 +72,27 @@ public class UserServiceImpl implements UserService {
         // 5️⃣ 入库
         return userMapper.insertUser(user);
 
+    }
+
+    @Override
+    public User getById(Integer userId) {
+        return userMapper.selectById(userId);
+    }
+
+
+    @Override
+    public void updateBasicInfo(Integer userId, String phone, String email) {
+        userMapper.updateBasicInfo(userId, phone, email);
+    }
+
+    @Override
+    public boolean changePassword(Integer userId, String oldPwd, String newPwd) {
+        User user = userMapper.selectById(userId);
+        if (user == null || !BCrypt.checkpw(oldPwd, user.getPassword())) {
+            return false;
+        }
+        String encoded = BCrypt.hashpw(newPwd, BCrypt.gensalt());
+        userMapper.updatePassword(userId, encoded);
+        return true;
     }
 }

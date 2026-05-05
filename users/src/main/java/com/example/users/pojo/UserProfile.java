@@ -23,7 +23,4 @@ public class UserProfile {
 
     private String idCard;
 
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
 }

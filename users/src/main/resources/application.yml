@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: users
+server:
+  port: 8082
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

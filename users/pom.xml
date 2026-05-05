@@ -25,6 +25,7 @@
             <artifactId>spring-security-core</artifactId>
             <version>5.7.1</version> <!-- 使用与您Spring Boot版本兼容的版本 -->
         </dependency>
+
     </dependencies>
 
 
